@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.7.2
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    working_directory: ~/docker_django_sns0730/src
     steps:
       - checkout
       - setup_remote_docker:
