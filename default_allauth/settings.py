@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #ここからdjango-allauthを使うための記述
+    #django-allauthを使うための記述
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -50,6 +50,10 @@ INSTALLED_APPS = [
 
     #作成したアプリの追加
     'testApp',
+
+    #cloudinaryを使うための記述
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -175,3 +179,11 @@ DATABASES['default'].update(db_from_env)
 #heroku
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+#cloudinary
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'your_cloud_name',
+    'API_KEY': 'your_api_key',
+    'API_SECRET': 'your_api_secret'
+}

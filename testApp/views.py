@@ -1,7 +1,11 @@
 
-#cd django202107/docker_django_sns/myproject
-#cd django202107/github/pushtest/authtest/default_allauth
-#python manage.py runserver
+#cd django202107/docker_django_sns0730
+'''
+docker-compose run --rm web python3 manage.py makemigrations
+docker-compose run --rm web python3 manage.py migrate
+docker-compose build
+docker-compose up
+'''
 
 from django.views.generic import TemplateView
 from django.shortcuts import render
@@ -40,6 +44,7 @@ class TopView(TemplateView):
 
         #メッセージ情報の取得(ページネーション)
         data = SnsMessageModel.objects.all()
+        print(data)
         page = Paginator(data,3)
         self.params['data'] = page.get_page(num)
 
@@ -193,8 +198,17 @@ class SnsCreateView(TemplateView):
         #アップロードされたコメントと画像をDB(SnsMessageModel)に保存
         user_id = request.user.id
         message = request.POST['message']
+        
         picture = request.FILES['picture']
         snscreate = SnsMessageModel(user_id = user_id,message = message,picture = picture)
+
+        '''
+        uploaded = request.FILES['picture']
+        attachment = SnsMessageModel()
+        attachment.picture = uploaded.read()
+        snscreate = SnsMessageModel(user_id = user_id,message = message,picture = attachment.picture)
+        '''
+        
         snscreate.save()
 
         #next.pyよりrender実行、mysnsshow.htmlに遷移(自分の過去に投稿した記事一覧)

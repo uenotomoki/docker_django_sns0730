@@ -45,6 +45,9 @@
                 </p>
                 <p>ユーザーコメント：<br>{{item.message|linebreaks}}</p>
                 <p><img src='/testApp{{ MEDIA_URL }}{{item.picture}}' style="width:300px;height:auto"></p>
+                <p><{{item.picture}}></p>
+                {% cloudinary item.picture.url width=300 height=150 %}
+
                 <p><a href="{% url 'snscommentcreate' item.id %}" class="btn btn-primary btn-sm my-3z">コメント投稿</a>
                     <a href="{% url 'snscommentindex' item.id %}" class="btn btn-primary btn-sm my-3z">コメント一覧<a></p>
                 <!--<p>コメント数{{data_comment_num}}左の{{ forloop.counter }}番目の数</p>-->
